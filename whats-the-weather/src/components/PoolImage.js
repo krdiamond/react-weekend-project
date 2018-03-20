@@ -24,7 +24,7 @@ class PoolImage extends Component {
     }
   }
 
-  
+
   render() {
     return (
       <div className="image_container">
@@ -34,7 +34,7 @@ class PoolImage extends Component {
               <img src={HiroshiNagaiDay} height="900" alt="Hiroshi Nagai Day"/>:
               <img src={HiroshiNagaiNight} height="900" alt="Hiroshi Nagai Night"/>}
         </div>
-          {this.props.weatherData.cloudy ? <Clouds/> : null }
+          {this.props.weatherData.cloudy ? <Clouds /> : null }
       </div>
     )}
 

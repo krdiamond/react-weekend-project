@@ -1,18 +1,12 @@
 import React, { Component } from 'react';
 import '../App.css';
 
-class AddressLocationForm extends Component {
+class LocationForm extends Component {
 
   state = {
+    state: "",
     city: "",
-    state: ""
   }
-
-  handleSubmit = event => {
-    event.preventDefault();
-    let location = this.state;
-    this.props.addLocation(location);
-  };
 
   handleInputChange = event => {
     this.setState({
@@ -20,10 +14,16 @@ class AddressLocationForm extends Component {
     });
   };
 
+  handleSubmit = event => {
+    event.preventDefault();
+    let location = this.state;
+    this.props.grabWeather(location);
+  };
+
 
   render() {
     return (
-      <div className="address_form">
+      <div className="location_form">
         <form onSubmit={this.handleSubmit}>
             <input
               onChange={this.handleInputChange}
@@ -44,4 +44,4 @@ class AddressLocationForm extends Component {
   }
 }
 
-export default AddressLocationForm;
+export default LocationForm;

@@ -8,7 +8,17 @@
 #phases of the moon api
 #fix css so that everything is centered
 #mouse under water with bubbles
-#bird to eat my hand 
+#bird to eat my hand
+#daily to do list on the side?
+#create as a chrome extention 
+
+
+#https://expo.io/tools to run on mobile
+
+#git hub - react-native-web
+-
+
+
 
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 

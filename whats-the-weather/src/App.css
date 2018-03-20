@@ -1,38 +1,64 @@
 
 
-.weather_stats {
-  position: absolute;
-  left: auto;
-  right: auto;
+.app {
+  text-align: center;
 }
 
-.rain{
+.image_container {
+  display: inline-block;
+  position: relative;
+  text-align: center;
+}
+.actual_image {
+  position: relative;
+
+}
+.clouds {
   position: absolute;
+  z-index: 2
+}
+
+#cloud1{
+  left:0px;
   top: 30px;
+  width: 400px;
+}
+
+#cloud2{
+  left: 290px;
+  top: 200px;
+  width: 300px;
+}
+
+#cloud3{
+  left: 450px;
+  top: 10px;
+  width: 200px;
+}
+
+
+
+ .rain{
+  position: absolute;
+  top: 0px;
   left: 0px;
-  width: 100%;
+  z-index: 1;
+  width: 1046px;
   height: 900px;
-  z-index: 1;
 }
 
-.cloud {
-  position: absolute;
-  top: 30px;
-  left: 0px;
-  z-index: 1;
-}
 
-.empty_box {
+/* .empty_box {
   position: absolute;
   top: 550px;
   left: 200px;
   z-index: 1;
   width: 600px;
   height: 100px;
-}
+} */
 
 
-@keyframes boat {
+/* @keyframes boat {
     0% {
       right: 0px;
       opacity: 1;
@@ -58,22 +84,4 @@
   animation-name: boat;
   animation-duration: 100s;
   animation-fill-mode: forwards;
-}
-
-#cloud1{
-  top: 30px;
-  left: 0px;
-  width: 400px;
-}
-
-#cloud2{
-  left: 290px;
-  top: 200px;
-  width: 300px;
-}
-
-#cloud3{
-  left: 450px;
-  top: 10px;
-  width: 200px;
-}
+} */

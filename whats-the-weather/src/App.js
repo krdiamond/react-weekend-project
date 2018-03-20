@@ -1,49 +1,54 @@
 import React, { Component } from 'react';
 import './App.css';
-import WeatherStats from './components/WeatherStats';
-import AddressLocationForm from './components/AddressLocationForm';
-import { Route } from 'react-router-dom';
+import PoolImage from './components/PoolImage';
+import CarImage from './components/CarImage';
+import NotFound from './components/NotFound';
+import LocationForm from './components/LocationForm';
+import { Route, Switch } from 'react-router-dom';
 
 
 class App extends Component {
 
   state = {
-      state: "",
-      city: "",
-      timeWeather: [],
-      allOtherWeather: [],
+      timeData: [],
+      allData: [],
       daylight: "",
-      cloudy: ""
+      cloudy: "",
+      location: "",
     }
 
+// ------ used for testing -------- //
 
 // componentDidMount= () => {
 //   this.fetchWeather()
 // }
 
-  fetchWeather = () => {
-    let URL = "http://api.wunderground.com/api/" + API_KEY + `/hourly/q/${this.state.state}/${this.state.city}.json`;
+// ------ used for testing -------- //
+
+  fetchWeather = (location) => {
+    let API_KEY = "da39fd523896128d";
+    let URL = "http://api.wunderground.com/api/" + API_KEY + `/hourly/q/${location.state}/${location.city}.json`;
     fetch(`${URL}`)
        .then(res => res.json())
-       .then(json => this.setTheWeatherState(json));
+       .then(json => this.setTheWeatherState(json,location));
   }
 
-  setTheWeatherState = (json) => {
+  setTheWeatherState = (json,location) => {
     this.setState({
-      timeWeather: json.hourly_forecast[0]['FCTTIME'],
-      allOtherWeather: json.hourly_forecast[0],
+      location: location,
+      timeData: json.hourly_forecast[0]['FCTTIME'],
+      allData: json.hourly_forecast[0],
     });
     this.setDayLight()
     this.isItCloudy()
-    console.log(json)
   }
 
   setDayLight = () => {
-    let hour = this.state.timeWeather.hour
+    let hour = this.state.timeData.hour
     if(hour <= 7 || hour >= 19){
       this.setState({
         daylight: false
-      }, () => console.log(this.state.daylight))
+      })
     }
     else {
       this.setState({
@@ -53,8 +58,8 @@ class App extends Component {
   }
 
   isItCloudy = () => {
-    if(this.state.allOtherWeather.condition.includes('Cloudy') ||
-     this.state.allOtherWeather.condition.includes('Overcast')) {
+    if(this.state.allData.condition.includes('Cloudy') ||
+     this.state.allData.condition.includes('Overcast')) {
       this.setState({
         cloudy: true
       });
@@ -66,26 +71,19 @@ class App extends Component {
     }
   }
 
-  addLocation = location => {
-      this.setState({
-        city: location.city,
-        state: location.state
-      }, () => this.fetchWeather());
-    };
-
 
   render() {
     return (
       <div className="app">
-        <AddressLocationForm
-          addLocation={this.addLocation}/>
-        {(this.state.state === "" && this.state.city ==="") ? null:
-          <WeatherStats
-          timeWeatherProps={this.state.timeWeather}
-          allOtherWeatherProps={this.state.allOtherWeather}
-          daylightProps={this.state.daylight}
-          cloudy={this.state.cloudy}/>}
+        <LocationForm grabWeather={this.fetchWeather}/>
+        <Switch>
+          <Route exact path="/" render={()=><PoolImage weatherData={this.state}/>}/>
+          <Route path="/pool" render={()=><PoolImage weatherData={this.state}/>}/>
+          <Route path="/car" render={()=><CarImage weatherData={this.state}/>}/>
+          <Route component={NotFound}/>
+        </Switch>
       </div>
+
     );
   }
 }

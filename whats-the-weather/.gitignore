@@ -4,7 +4,7 @@
 /node_modules
 
 #api key
-/api_key
+api_key.js
 
 # testing
 /coverage
@@ -22,5 +22,3 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-
-let API_KEY = "da39fd523896128d";

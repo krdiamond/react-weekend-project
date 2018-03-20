@@ -1,12 +1,28 @@
 import React, { Component } from 'react';
 import '../App.css';
+import {API_KEY} from "../api_key.js"
 
 class LocationForm extends Component {
 
   state = {
     state: "",
     city: "",
-    inputLocations: [],
+    inputLocations: [
+      {state: "NY",
+      city: "New York"},
+      {state: "WA",
+      city: "Seattle"},
+      {state: "CA",
+      city: "San Francisco"},
+      {state: "JP",
+      city: "Tokyo"},
+      {state: "AZ",
+      city: "Tucson"},
+      {state: "WY",
+      city: "jackson hole"},
+      {state: "NJ",
+      city: "Clifton"},
+    ],
   }
 
   handleInputChange = event => {
@@ -21,13 +37,21 @@ class LocationForm extends Component {
     this.props.grabWeather(location);
   };
 
+
   findCloudyCity = () => {
-    console.log(this.props.weatherData.condition)
-    let URL = "http://api.wunderground.com/api/" + API_KEY + `/hourly/q/${location.state}/${location.city}.json`;
+    this.state.inputLocations.map(each_location =>
+      this.fetchWeather(each_location)
+    )
+
+  }
+
+
+  fetchWeather = (each_location) => {
+    console.log(each_location.state)
+    let URL = "http://api.wunderground.com/api/" + API_KEY + `/hourly/q/${each_location.state}/${each_location.city}.json`;
     fetch(`${URL}`)
        .then(res => res.json())
-       .then(json => this.setTheWeatherState(json,location));
-  }
+       .then(json => console.log(json));
   }
 
 

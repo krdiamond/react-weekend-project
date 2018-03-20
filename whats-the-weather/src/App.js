@@ -5,6 +5,7 @@ import CarImage from './components/CarImage';
 import NotFound from './components/NotFound';
 import LocationForm from './components/LocationForm';
 import { Route, Switch } from 'react-router-dom';
+import {API_KEY} from "./api_key.js"
 
 
 class App extends Component {
@@ -26,7 +27,6 @@ class App extends Component {
 // ------ used for testing -------- //
 
   fetchWeather = (location) => {
-
     let URL = "http://api.wunderground.com/api/" + API_KEY + `/hourly/q/${location.state}/${location.city}.json`;
     fetch(`${URL}`)
        .then(res => res.json())

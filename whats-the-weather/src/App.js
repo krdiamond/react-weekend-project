@@ -26,7 +26,7 @@ class App extends Component {
 // ------ used for testing -------- //
 
   fetchWeather = (location) => {
-    let API_KEY = "da39fd523896128d";
+
     let URL = "http://api.wunderground.com/api/" + API_KEY + `/hourly/q/${location.state}/${location.city}.json`;
     fetch(`${URL}`)
        .then(res => res.json())
@@ -59,7 +59,9 @@ class App extends Component {
 
   isItCloudy = () => {
     if(this.state.allData.condition.includes('Cloudy') ||
-     this.state.allData.condition.includes('Overcast')) {
+     this.state.allData.condition.includes('Overcast') ||
+      this.state.allData.condition.includes('Snow') ||
+       this.state.allData.condition.includes('Rain')) {
       this.setState({
         cloudy: true
       });
@@ -73,10 +75,9 @@ class App extends Component {
 
 
   render() {
-    console.log(this.state)
     return (
       <div className="app">
-        <LocationForm grabWeather={this.fetchWeather}/>
+        <LocationForm grabWeather={this.fetchWeather} weatherData={this.state.allData}/>
         <Switch>
           <Route exact path="/" render={()=><PoolImage weatherData={this.state}/>}/>
           <Route path="/pool" render={()=><PoolImage weatherData={this.state}/>}/>

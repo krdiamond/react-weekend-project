@@ -24,6 +24,15 @@ class App extends Component {
 //   this.fetchWeather()
 // }
 
+//VIRTUAL DOM - STORED IN MEMORY, REACT COMPARES WHATS THERE AND WHATS NOT THERE, CHECKS TO FIND ANY MIS MATCHES AND UPDATES THE ACTUAL DOM
+// WILL MOUNT FIRES RIGHT BEFORE - DO NOT USE
+// DID MOUNT FIRES AFTER RENDER - DOM SHOULD BE BUILT FIRST BEFORE YOU TRY TO CHANGE WHATS ON THE PAGE, BEST WAY TO START A FETCH
+
+//TO PASS PROPS FROM 3 LEVELS DOWN WITH MAYBE A FUNCTION OR SOME INFO, THE PROPS NEED TO BE PASSED TO EACH PARENT UNTIL IT GETS WHERE IT NEEDS TO GO
+// MAYBE IT NEEDS TO GO ALL THE WAY UP TO THE APP
+
+//FOR A FILTER, SEARCH AND SEE IF IT'S INCLDUED, AND THEN CHANGE THE STATE TO DISPLAY THE FILTERED RESULTS INSTEAD OF OTHER RESULTS
+
 // ------ used for testing -------- //
 
   fetchWeather = (location) => {
@@ -77,7 +86,7 @@ class App extends Component {
   render() {
     return (
       <div className="app">
-        <LocationForm grabWeather={this.fetchWeather} weatherData={this.state.allData}/>
+        <LocationForm grabWeather={this.fetchWeather}/>
         <Switch>
           <Route exact path="/" render={()=><PoolImage weatherData={this.state}/>}/>
           <Route path="/pool" render={()=><PoolImage weatherData={this.state}/>}/>

@@ -2,58 +2,39 @@ import React, { Component } from 'react';
 import '../App.css';
 import {API_KEY} from "../api_key.js"
 
+// presentational piece, needs state but presentational component
+// not functional component
+
+
 class LocationForm extends Component {
 
   state = {
     state: "",
     city: "",
-    inputLocations: [
-      {state: "NY",
-      city: "New York"},
-      {state: "WA",
-      city: "Seattle"},
-      {state: "CA",
-      city: "San Francisco"},
-      {state: "JP",
-      city: "Tokyo"},
-      {state: "AZ",
-      city: "Tucson"},
-      {state: "WY",
-      city: "jackson hole"},
-      {state: "NJ",
-      city: "Clifton"},
-    ],
   }
+
+//when adding to an array, never manipulate state, make a copy first
+//add to an array with the spread operator comma what you are adding ----
+      //this.setState({
+      //   key: [...this.state.key, what_you_are_adding]
+      // })
+
 
   handleInputChange = event => {
     this.setState({
       [event.target.name]: event.target.value,
+      // DYNAMICALLY SETS STATE BASED ON THE ENTIRE FORM'S INPUT, DO NOT FORGET TO INCLUDE NAME ON THE FORM AS A PROP
+      // WILL TAKE EACH NAME AND DYNAMICALLY SET THE VALUE
     });
   };
 
   handleSubmit = event => {
     event.preventDefault();
+    //NEED TO INCLUDE INVENT SO THAT EVENT.PREVENTDEFAULT WORKS
     let location = this.state;
+    //SETS THE FINAL STATE ON CLICK OF THE SUBMIT BUTTON AND THEN
     this.props.grabWeather(location);
   };
-
-
-  findCloudyCity = () => {
-    this.state.inputLocations.map(each_location =>
-      this.fetchWeather(each_location)
-    )
-
-  }
-
-
-  fetchWeather = (each_location) => {
-    console.log(each_location.state)
-    let URL = "http://api.wunderground.com/api/" + API_KEY + `/hourly/q/${each_location.state}/${each_location.city}.json`;
-    fetch(`${URL}`)
-       .then(res => res.json())
-       .then(json => console.log(json));
-  }
-
 
   render() {
     return (
@@ -73,7 +54,6 @@ class LocationForm extends Component {
             type="submit"
             value="Input Location"/>
         </form>
-        <div>{this.findCloudyCity()}</div>
       </div>
     );
   }

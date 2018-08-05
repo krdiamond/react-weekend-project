@@ -5,7 +5,8 @@ import Boat from '../components/boat';
 import HiroshiNagaiDay from '../images/hiroshi_nagai_pool.jpg';
 import HiroshiNagaiNight from '../images/hiroshi_nagai_pool_night.jpg';
 
-
+// this should be a function and not a class because it doesn't have a state, classes do not have state
+// this is a presentational component
 
 class PoolImage extends Component {
 
